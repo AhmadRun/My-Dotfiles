@@ -1,0 +1,370 @@
+[
+  {
+    "source": "~/.config/niri/config.kdl",
+    "path": ".config/niri/config.kdl"
+  },
+  {
+    "source": "~/.config/niri/cruze-colors.kdl",
+    "path": ".config/niri/cruze-colors.kdl"
+  },
+  {
+    "source": "~/.config/niri/dms/windowrules.kdl",
+    "path": ".config/niri/dms/windowrules.kdl"
+  },
+  {
+    "source": "~/.config/waybar/config",
+    "path": ".config/waybar/config"
+  },
+  {
+    "source": "~/.config/waybar/modules.json",
+    "path": ".config/waybar/modules.json"
+  },
+  {
+    "source": "~/.config/waybar/style.css",
+    "path": ".config/waybar/style.css"
+  },
+  {
+    "source": "~/.config/waybar/colors.css",
+    "path": ".config/waybar/colors.css"
+  },
+  {
+    "source": "~/.config/waybar/scripts/battery-menu.sh",
+    "path": ".config/waybar/scripts/battery-menu.sh"
+  },
+  {
+    "source": "~/.config/waybar/scripts/battery-mode.sh",
+    "path": ".config/waybar/scripts/battery-mode.sh"
+  },
+  {
+    "source": "~/.config/waybar/scripts/wifi-menu.sh",
+    "path": ".config/waybar/scripts/wifi-menu.sh"
+  },
+  {
+    "source": "~/.config/waybar/scripts/Cava.sh",
+    "path": ".config/waybar/scripts/Cava.sh"
+  },
+  {
+    "source": "~/.config/rofi/config.rasi",
+    "path": ".config/rofi/config.rasi"
+  },
+  {
+    "source": "~/.config/rofi/theme-colors.rasi",
+    "path": ".config/rofi/theme-colors.rasi"
+  },
+  {
+    "source": "~/.config/rofi/cruze-colors.rasi",
+    "path": ".config/rofi/cruze-colors.rasi"
+  },
+  {
+    "source": "~/.config/rofi/sections.json",
+    "path": ".config/rofi/sections.json"
+  },
+  {
+    "source": "~/.config/rofi/session.rasi",
+    "path": ".config/rofi/session.rasi"
+  },
+  {
+    "source": "~/.config/rofi/wallpaper.rasi",
+    "path": ".config/rofi/wallpaper.rasi"
+  },
+  {
+    "source": "~/.config/rofi/shared/colors.rasi",
+    "path": ".config/rofi/shared/colors.rasi"
+  },
+  {
+    "source": "~/.config/rofi/shared/fonts.rasi",
+    "path": ".config/rofi/shared/fonts.rasi"
+  },
+  {
+    "source": "~/.config/rofi/launchers/launcher.rasi",
+    "path": ".config/rofi/launchers/launcher.rasi"
+  },
+  {
+    "source": "~/.config/rofi/launchers/launcher.sh",
+    "path": ".config/rofi/launchers/launcher.sh"
+  },
+  {
+    "source": "~/.config/rofi/launchers/shared/colors.rasi",
+    "path": ".config/rofi/launchers/shared/colors.rasi"
+  },
+  {
+    "source": "~/.config/rofi/launchers/shared/fonts.rasi",
+    "path": ".config/rofi/launchers/shared/fonts.rasi"
+  },
+  {
+    "source": "~/.config/rofi/powermenu/powermenu.sh",
+    "path": ".config/rofi/powermenu/powermenu.sh"
+  },
+  {
+    "source": "~/.config/kitty/kitty.conf",
+    "path": ".config/kitty/kitty.conf"
+  },
+  {
+    "source": "~/.config/kitty/theme.conf",
+    "path": ".config/kitty/theme.conf"
+  },
+  {
+    "source": "~/.config/nvim/init.lua",
+    "path": ".config/nvim/init.lua"
+  },
+  {
+    "source": "~/.config/nvim/lazy-lock.json",
+    "path": ".config/nvim/lazy-lock.json"
+  },
+  {
+    "source": "~/.config/nvim/lazyvim.json",
+    "path": ".config/nvim/lazyvim.json"
+  },
+  {
+    "source": "~/.config/nvim/.neoconf.json",
+    "path": ".config/nvim/.neoconf.json"
+  },
+  {
+    "source": "~/.config/nvim/stylua.toml",
+    "path": ".config/nvim/stylua.toml"
+  },
+  {
+    "source": "~/.config/nvim/LICENSE",
+    "path": ".config/nvim/LICENSE"
+  },
+  {
+    "source": "~/.config/nvim/omarchy-palette.json",
+    "path": ".config/nvim/omarchy-palette.json"
+  },
+  {
+    "source": "~/.config/nvim/lua/config/autocmds.lua",
+    "path": ".config/nvim/lua/config/autocmds.lua"
+  },
+  {
+    "source": "~/.config/nvim/lua/config/keymaps.lua",
+    "path": ".config/nvim/lua/config/keymaps.lua"
+  },
+  {
+    "source": "~/.config/nvim/lua/config/lazy.lua",
+    "path": ".config/nvim/lua/config/lazy.lua"
+  },
+  {
+    "source": "~/.config/nvim/lua/config/options.lua",
+    "path": ".config/nvim/lua/config/options.lua"
+  },
+  {
+    "source": "~/.config/nvim/lua/desktop_theme.lua",
+    "path": ".config/nvim/lua/desktop_theme.lua"
+  },
+  {
+    "source": "~/.config/nvim/lua/plugins/desktop-theme.lua",
+    "path": ".config/nvim/lua/plugins/desktop-theme.lua"
+  },
+  {
+    "source": "~/.config/helix/config.toml",
+    "path": ".config/helix/config.toml"
+  },
+  {
+    "source": "~/.config/helix/themes/cruze.toml",
+    "path": ".config/helix/themes/cruze.toml"
+  },
+  {
+    "source": "~/.config/yazi/keymap.toml",
+    "path": ".config/yazi/keymap.toml"
+  },
+  {
+    "source": "~/.config/yazi/package.toml",
+    "path": ".config/yazi/package.toml"
+  },
+  {
+    "source": "~/.config/yazi/plugins/smart-enter.yazi/main.lua",
+    "path": ".config/yazi/plugins/smart-enter.yazi/main.lua"
+  },
+  {
+    "source": "~/.config/yazi/plugins/smart-enter.yazi/LICENSE",
+    "path": ".config/yazi/plugins/smart-enter.yazi/LICENSE"
+  },
+  {
+    "source": "~/.config/fastfetch/config.jsonc",
+    "path": ".config/fastfetch/config.jsonc"
+  },
+  {
+    "source": "~/.config/fastfetch/pick-image.fish",
+    "path": ".config/fastfetch/pick-image.fish"
+  },
+  {
+    "source": "~/.config/btop/btop.conf",
+    "path": ".config/btop/btop.conf"
+  },
+  {
+    "source": "~/.config/btop/themes/omarchy.theme",
+    "path": ".config/btop/themes/omarchy.theme"
+  },
+  {
+    "source": "~/.config/cava/config",
+    "path": ".config/cava/config"
+  },
+  {
+    "source": "~/.config/swaync/style.css",
+    "path": ".config/swaync/style.css"
+  },
+  {
+    "source": "~/.config/swaync/colors.css",
+    "path": ".config/swaync/colors.css"
+  },
+  {
+    "source": "~/.config/swaylock/config",
+    "path": ".config/swaylock/config"
+  },
+  {
+    "source": "~/.config/gtk-3.0/gtk.css",
+    "path": ".config/gtk-3.0/gtk.css"
+  },
+  {
+    "source": "~/.config/gtk-3.0/colors.css",
+    "path": ".config/gtk-3.0/colors.css"
+  },
+  {
+    "source": "~/.config/gtk-3.0/settings.ini",
+    "path": ".config/gtk-3.0/settings.ini"
+  },
+  {
+    "source": "~/.config/gtk-4.0/gtk.css",
+    "path": ".config/gtk-4.0/gtk.css"
+  },
+  {
+    "source": "~/.config/gtk-4.0/colors.css",
+    "path": ".config/gtk-4.0/colors.css"
+  },
+  {
+    "source": "~/.config/gtk-4.0/settings.ini",
+    "path": ".config/gtk-4.0/settings.ini"
+  },
+  {
+    "source": "~/.config/fontconfig/fonts.conf",
+    "path": ".config/fontconfig/fonts.conf"
+  },
+  {
+    "source": "~/.config/qt5ct/qt5ct.conf",
+    "path": ".config/qt5ct/qt5ct.conf"
+  },
+  {
+    "source": "~/.config/qt5ct/colors/cruze.conf",
+    "path": ".config/qt5ct/colors/cruze.conf"
+  },
+  {
+    "source": "~/.config/qt6ct/qt6ct.conf",
+    "path": ".config/qt6ct/qt6ct.conf"
+  },
+  {
+    "source": "~/.config/qt6ct/colors/cruze.conf",
+    "path": ".config/qt6ct/colors/cruze.conf"
+  },
+  {
+    "source": "~/.config/matugen/config.toml",
+    "path": ".config/matugen/config.toml"
+  },
+  {
+    "source": "~/.config/matugen/templates/kitty-theme.conf",
+    "path": ".config/matugen/templates/kitty-theme.conf"
+  },
+  {
+    "source": "~/.config/matugen/templates/waybar-colors.css",
+    "path": ".config/matugen/templates/waybar-colors.css"
+  },
+  {
+    "source": "~/.config/matugen/templates/niri-colors.kdl",
+    "path": ".config/matugen/templates/niri-colors.kdl"
+  },
+  {
+    "source": "~/.config/environment.d/10-editor.conf",
+    "path": ".config/environment.d/10-editor.conf"
+  },
+  {
+    "source": "~/.config/environment.d/60-noctalia-qt.conf",
+    "path": ".config/environment.d/60-noctalia-qt.conf"
+  },
+  {
+    "source": "~/.config/environment.d/70-window-decorations.conf",
+    "path": ".config/environment.d/70-window-decorations.conf"
+  },
+  {
+    "source": "~/.config/systemd/user/arabic-keyboard.service",
+    "path": ".config/systemd/user/arabic-keyboard.service"
+  },
+  {
+    "source": "~/.config/systemd/user/cliphist-wipe.service",
+    "path": ".config/systemd/user/cliphist-wipe.service"
+  },
+  {
+    "source": "~/.config/fish/config.fish",
+    "path": ".config/fish/config.fish"
+  },
+  {
+    "source": "~/.config/fish/conf.d/fastfetch.fish",
+    "path": ".config/fish/conf.d/fastfetch.fish"
+  },
+  {
+    "source": "~/.config/fish/conf.d/inir-path.fish",
+    "path": ".config/fish/conf.d/inir-path.fish"
+  },
+  {
+    "source": "~/.local/bin/omarchy-theme",
+    "path": ".local/bin/omarchy-theme"
+  },
+  {
+    "source": "~/.local/bin/wallpaper-theme",
+    "path": ".local/bin/wallpaper-theme"
+  },
+  {
+    "source": "~/.local/bin/arabic-keyboard-toggle",
+    "path": ".local/bin/arabic-keyboard-toggle"
+  },
+  {
+    "source": "~/.local/bin/rofi-sections",
+    "path": ".local/bin/rofi-sections"
+  },
+  {
+    "source": "~/.bashrc",
+    "path": ".bashrc"
+  },
+  {
+    "source": "~/.bash_profile",
+    "path": ".bash_profile"
+  },
+  {
+    "source": "~/.config/starship.toml",
+    "path": ".config/starship.toml"
+  },
+  {
+    "source": "~/.config/noctalia/hooks/wallpaper-mode.py",
+    "path": "optional/noctalia/.config/noctalia/hooks/wallpaper-mode.py"
+  },
+  {
+    "source": "~/.config/noctalia/wallpaper-mode.toml",
+    "path": "optional/noctalia/.config/noctalia/wallpaper-mode.toml"
+  },
+  {
+    "source": "/usr/local/libexec/cruze-charge-mode",
+    "path": "optional/battery/root/usr/local/libexec/cruze-charge-mode"
+  },
+  {
+    "source": "/etc/systemd/system/cruze-charge-mode.service",
+    "path": "optional/battery/root/etc/systemd/system/cruze-charge-mode.service"
+  },
+  {
+    "source": "/etc/sddm.conf.d/90-cruze-noir.conf",
+    "path": "optional/sddm/root/etc/sddm.conf.d/90-cruze-noir.conf"
+  },
+  {
+    "source": "/usr/share/sddm/themes/cruze-noir/Main.qml",
+    "path": "optional/sddm/root/usr/share/sddm/themes/cruze-noir/Main.qml"
+  },
+  {
+    "source": "/usr/share/sddm/themes/cruze-noir/metadata.desktop",
+    "path": "optional/sddm/root/usr/share/sddm/themes/cruze-noir/metadata.desktop"
+  },
+  {
+    "source": "/usr/share/sddm/themes/cruze-noir/theme.conf",
+    "path": "optional/sddm/root/usr/share/sddm/themes/cruze-noir/theme.conf"
+  },
+  {
+    "source": "~/.config/cava/config1",
+    "path": ".config/cava/config1"
+  }
+]

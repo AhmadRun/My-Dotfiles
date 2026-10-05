@@ -1,0 +1,338 @@
+{
+  ".bash_profile": {
+    "sha256": "88eded9f4dddd4bfb525b9f862e0601945e94785cfbd488dbd942752d34644af"
+  },
+  ".bashrc": {
+    "sha256": "d5992312a7f2ed95a3ec16501d9053dcbd0681b5b7d0a8a8e9bad188a1d6c988"
+  },
+  ".config/btop/btop.conf": {
+    "sha256": "62d130b48f80c396b13a941b0cdf7b0af5cb8060e4258770a3fb222e8d3de653"
+  },
+  ".config/btop/themes/omarchy.theme": {
+    "sha256": "2f07db07ebc9095f94ccd905e36d5041565677b9515728c8716cf34632328d08"
+  },
+  ".config/cava/config": {
+    "sha256": "a4b2527aeee307158c3046fe5280dd0581cb62b186c130a489b1eb8ef0f8133d"
+  },
+  ".config/cava/config1": {
+    "sha256": "1481c50e12803ef416e1f90a7d44f3f9bfddbf24f951d8e9dff12c5d75c4d26e"
+  },
+  ".config/environment.d/10-editor.conf": {
+    "sha256": "3c29f3423780f74472dfeb71571156332ae94ba5ce3deb0366b57ebf030a63b4"
+  },
+  ".config/environment.d/60-noctalia-qt.conf": {
+    "sha256": "cd3f891aec95fddf80329c67f07fae96b9c2fc9bc4409e3275a4b838088ff9fa"
+  },
+  ".config/environment.d/70-window-decorations.conf": {
+    "sha256": "fd13b93a6348215a6602e8fc9cf320b4bc2f758356368df7adce0f236716e1d4"
+  },
+  ".config/fastfetch/config.jsonc": {
+    "sha256": "7ab2c245cde3bab54586544abfa822e95c177304185ea8a8397c18edbfe5a183"
+  },
+  ".config/fastfetch/pick-image.fish": {
+    "sha256": "f2730af5c9df3ff19f49add99891fa74f67637e3176cb9863a73b0038e09c7da"
+  },
+  ".config/fish/conf.d/fastfetch.fish": {
+    "sha256": "61457bc6d68eb0a16d4d7090bfa76aabc40aabed91fc20e2d6a7010242962347"
+  },
+  ".config/fish/conf.d/inir-path.fish": {
+    "sha256": "b5a7680d1f6af31b3b293239a049b37cd48e50df84dca3a77415e134201861aa"
+  },
+  ".config/fish/config.fish": {
+    "sha256": "1482329078d2e22827b51b65def48934f48ad73e96787c963801bbbef5af0ef5"
+  },
+  ".config/fontconfig/fonts.conf": {
+    "sha256": "76cfe423cffccd7d80ec9a91e73f64cc7fc5b7c23b439c86c73a225e9887e14e"
+  },
+  ".config/gtk-3.0/colors.css": {
+    "sha256": "79bffafaa3988de9d78b3f8e1696bbb5d6de53783d50754301f813f2a64b2930"
+  },
+  ".config/gtk-3.0/gtk.css": {
+    "sha256": "df2350ccb3dafcae4d98b83122b77e932696ee7237aaf5c73fbd1d663b05ffac"
+  },
+  ".config/gtk-3.0/settings.ini": {
+    "sha256": "fb823b28cfcc8f66033ddd624dfd40b27a4d98ba4f82beeed6d8fdaa8956df0f"
+  },
+  ".config/gtk-4.0/colors.css": {
+    "sha256": "79bffafaa3988de9d78b3f8e1696bbb5d6de53783d50754301f813f2a64b2930"
+  },
+  ".config/gtk-4.0/gtk.css": {
+    "sha256": "df2350ccb3dafcae4d98b83122b77e932696ee7237aaf5c73fbd1d663b05ffac"
+  },
+  ".config/gtk-4.0/settings.ini": {
+    "sha256": "fb823b28cfcc8f66033ddd624dfd40b27a4d98ba4f82beeed6d8fdaa8956df0f"
+  },
+  ".config/helix/config.toml": {
+    "sha256": "5b5d9448b3d2b581398bc27d64f9903bbe79579fa3cea833fd6482024ff70540"
+  },
+  ".config/helix/themes/cruze.toml": {
+    "sha256": "b54cab15184e10b5921de9464d068d7ff2b918b9e8488edd1fedddae667541d3"
+  },
+  ".config/kitty/kitty.conf": {
+    "sha256": "412422958768f342b9cdfb4e258c0c826617c2639da018509d664b0e6eb94c9b"
+  },
+  ".config/kitty/theme.conf": {
+    "sha256": "64f9dfccb4aee837f4a80d75d4c3a3bfe7c64d1504c0dd9e2db2a3f4d87d9d77"
+  },
+  ".config/matugen/config.toml": {
+    "sha256": "f86a57681ac0cebc4c36ee4dc5f971833550eed7a23262cc28d8a3b024c5365b"
+  },
+  ".config/matugen/templates/kitty-theme.conf": {
+    "sha256": "e2beca7df160ec1e68fdfc5cb73c237ec483f8f1dd3f0c20a4523a0f9ec264e4"
+  },
+  ".config/matugen/templates/niri-colors.kdl": {
+    "sha256": "fef49d7bdf6a6ab16043d64a83a659c99f7c26bf5cc0534180ae7521f4ab8a57"
+  },
+  ".config/matugen/templates/waybar-colors.css": {
+    "sha256": "39a403a0138b3f1ebe1a4613711390377fcb38f9d84121e15394da758727c5ef"
+  },
+  ".config/niri/config.kdl": {
+    "sha256": "33775dadc46f78d119630db5d5115da073d9a12d0ef4be793348678c919851ce"
+  },
+  ".config/niri/cruze-colors.kdl": {
+    "sha256": "6e1acce608bb62ac78578423232fbea4240bedb7679375e9354c315f9b3f6fd1"
+  },
+  ".config/niri/dms/windowrules.kdl": {
+    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  },
+  ".config/nvim/.neoconf.json": {
+    "sha256": "1819a5b64b71521f214b374bdb3b4dd7531a2b91b881c0803e0029811da7f3e4"
+  },
+  ".config/nvim/LICENSE": {
+    "sha256": "c71d239df91726fc519c6eb72d318ec65820627232b2f796219e87dcf35d0ab4"
+  },
+  ".config/nvim/init.lua": {
+    "sha256": "3b2d6e9976a515b7c8df08ed7c7f61a5751e9c08a6ff5579d621b87312c9e2c6"
+  },
+  ".config/nvim/lazy-lock.json": {
+    "sha256": "bf1ea3d276fb4f5cdfa87d700e8404af5717fda0f034fc584424eb803a4a1d30"
+  },
+  ".config/nvim/lazyvim.json": {
+    "sha256": "c5e6e47a04e9afbf60e324cdbc6728357a63ef1eb10b68eb46539e57c02eb56b"
+  },
+  ".config/nvim/lua/config/autocmds.lua": {
+    "sha256": "ccb2b3a99fe03698bdacaf41b98a48126c70fa38eaa1970e14e7309c876a9635"
+  },
+  ".config/nvim/lua/config/keymaps.lua": {
+    "sha256": "660a7d9a603a1b20b9ac13384ee21093f648646d8f4d575c52c5e5d9847f6764"
+  },
+  ".config/nvim/lua/config/lazy.lua": {
+    "sha256": "e7fd004df83c7f1170b783187951fd81562f87ab6da5d6ddd8f3ba0ff056d71c"
+  },
+  ".config/nvim/lua/config/options.lua": {
+    "sha256": "30d51b75969f1f8c16964e4495c6477234bc031a713ffd24ffdf6e5a33cd1ef9"
+  },
+  ".config/nvim/lua/desktop_theme.lua": {
+    "sha256": "f43cb8ef54a7e2a7dde6194b90a29c6068ca7f81c660a819ea5ce2396487b4ec"
+  },
+  ".config/nvim/lua/plugins/desktop-theme.lua": {
+    "sha256": "a2e833aed85c50b70a18a824b5ae7ff27120d61b5d19f86491441d78c186c344"
+  },
+  ".config/nvim/omarchy-palette.json": {
+    "sha256": "5bb2b0421a93190a3c65b342285ac7745d7006c9297beb906660dd27ac8fbfaa"
+  },
+  ".config/nvim/stylua.toml": {
+    "sha256": "59841fbcee7b707144c6a470e96e96e96062d7a59d2e45bac445984d863e1af2"
+  },
+  ".config/qt5ct/colors/cruze.conf": {
+    "sha256": "883ad9f10969399e6f03b10cdf68d006036d5313cf6f1a5bbcbccd26ec8176f5"
+  },
+  ".config/qt5ct/qt5ct.conf": {
+    "sha256": "ac83346156b0392546e12cbc4215f53ff31e02bfa1454cb13434d94cc9a1e2af"
+  },
+  ".config/qt6ct/colors/cruze.conf": {
+    "sha256": "883ad9f10969399e6f03b10cdf68d006036d5313cf6f1a5bbcbccd26ec8176f5"
+  },
+  ".config/qt6ct/qt6ct.conf": {
+    "sha256": "2b2bd26c4fc80ab32ea803d9f9dc4f22045910c44870bc332a97d9fea2aea378"
+  },
+  ".config/rofi/LICENSE": {
+    "sha256": "3972dc9744f6499f0f9b2dbf76696f2ae7ad8af9b23dde66d6af86c9dfb36986"
+  },
+  ".config/rofi/config.rasi": {
+    "sha256": "5d82061d6555ed536b90d848cccaa09a1b1276ff2b4c9fadb1d1127141f92e47"
+  },
+  ".config/rofi/cruze-colors.rasi": {
+    "sha256": "239226023bb6f9739239673df3b2fbb9bf7ac925e1a5f22e5c4140c0aa911b64"
+  },
+  ".config/rofi/launchers/launcher.rasi": {
+    "sha256": "56cd2ddbc01685ded5dfd7f2560e5cbc9e94605247df9cfccb8e6a4ed7d075a2"
+  },
+  ".config/rofi/launchers/launcher.sh": {
+    "sha256": "435a45ff1bf36fb1c1ebdcfc3593ae05076018746410f541d662027648c00898"
+  },
+  ".config/rofi/launchers/shared/colors.rasi": {
+    "sha256": "57a5d0533e48a92336a6edb302c5430104883ba323f65a066a7706d0461bcd5d"
+  },
+  ".config/rofi/launchers/shared/fonts.rasi": {
+    "sha256": "b30f2f6a688c65d300206afcb2c1e8bb9227c7fd17f20bc33a1bdfe2a6a1c25b"
+  },
+  ".config/rofi/powermenu/powermenu.sh": {
+    "sha256": "6369185073638dbdb5fe5755df011f07054dac17eba868f9206c139bbc157493"
+  },
+  ".config/rofi/sections.json": {
+    "sha256": "7ad8e0db5ac94744863e14deed311b6003a99e0fa8e04ebf8f32d151b8f4a185"
+  },
+  ".config/rofi/session.rasi": {
+    "sha256": "51aa75f6b3b57cb8d972e098c3855fe2e8658e56c4a59e2d0c7a3368bf564730"
+  },
+  ".config/rofi/shared/colors.rasi": {
+    "sha256": "57a5d0533e48a92336a6edb302c5430104883ba323f65a066a7706d0461bcd5d"
+  },
+  ".config/rofi/shared/fonts.rasi": {
+    "sha256": "c6dd4004ba954a7b5b2f7ea5f6f2c8c3ddc20c843923454e3e62faa0be85465e"
+  },
+  ".config/rofi/theme-colors.rasi": {
+    "sha256": "b2cb6f1b576b19f3e3a01e77bd4624e7976d981359b7f9144562f89d43b7d742"
+  },
+  ".config/rofi/wallpaper.rasi": {
+    "sha256": "dfeef35e320b2f7c22f4e68f1e9cee90f5ca1dbff11cec8ad6553fbd1c908ea3"
+  },
+  ".config/starship.toml": {
+    "sha256": "033e5d7ab3c74ac79a94cfee9c5ab13461121722e0bc10423fe56ba923685181"
+  },
+  ".config/swaylock/config": {
+    "sha256": "ddd12b3c32a8248a30297d5b153ad105a7c941b1fae295c38c6c90f491e0a532"
+  },
+  ".config/swaync/colors.css": {
+    "sha256": "6bf03d6e9c3603492a6f3d37fc09284adf97c62719d827ff081d0d24c781cc2f"
+  },
+  ".config/swaync/style.css": {
+    "sha256": "875e215ff5c57aabf063c6fc62ccd2b6c82df407a0d44afc7e2aa43088fdb24e"
+  },
+  ".config/systemd/user/arabic-keyboard.service": {
+    "sha256": "3adaa4d5fad0adf954cc37cbb0e13c28354b5e234d28af2d812ee5630b3f6439"
+  },
+  ".config/systemd/user/cliphist-wipe.service": {
+    "sha256": "2f3b78d7e86d48d7e8533319f7f8f025ab24f897d7cf06a932ae5cd565330412"
+  },
+  ".config/waybar/colors.css": {
+    "sha256": "c6fd730978315f35f595f906cc4ebb75ca40b44e1f16caa3b0b45ecdaba74f74"
+  },
+  ".config/waybar/config": {
+    "sha256": "59323bced0cf559f697dbd2ff13adafa029b668223b7192c131ac343c166684e"
+  },
+  ".config/waybar/modules.json": {
+    "sha256": "775cadd08b33f0b7741504e4f267c3fa86cb1fe3b694a2a2f34a6e513f5c630e"
+  },
+  ".config/waybar/scripts/Cava.sh": {
+    "sha256": "141b81711378e3aab8c8fa312960031b4747398c386626ab8e46a91e0912e675"
+  },
+  ".config/waybar/scripts/battery-menu.sh": {
+    "sha256": "f0077491626f6581402472a99d93ed3d0be8343d1c7e5662513de7e951940f4c"
+  },
+  ".config/waybar/scripts/battery-mode.sh": {
+    "sha256": "27d04ecbc503fcb608feddab8268a4f90045bc4556c148097a55eeaf38a8e717"
+  },
+  ".config/waybar/scripts/wifi-menu.sh": {
+    "sha256": "81739312f58dd3e24ec0a844890bf213c09e4a5bfad591cabc60fa8c2b092d9f"
+  },
+  ".config/waybar/style.css": {
+    "sha256": "768a34580b9e8ab37c2a31c37491d30390deb27a72677e607d625da908fac8ec"
+  },
+  ".config/yazi/keymap.toml": {
+    "sha256": "127fbbe624f24d00f8026e57cf773e65feced83385ed37394c0c84cf94491f76"
+  },
+  ".config/yazi/package.toml": {
+    "sha256": "bb19a6232bdf78d214f2998322cd4f7ecdfcf002bb72ed3fd111fb169b6a8420"
+  },
+  ".config/yazi/plugins/smart-enter.yazi/LICENSE": {
+    "sha256": "06a2b04a7ed4f030a87d10b884fc1a2215c5e91b371f69dfe173448e834f3752"
+  },
+  ".config/yazi/plugins/smart-enter.yazi/main.lua": {
+    "sha256": "5def5b84dd01cd5bb59357a3162f77dfc38be5433e36bbb9df6260917f786e5a"
+  },
+  ".githooks/pre-commit": {
+    "sha256": "d5aa7a1baa23f2f13da1460b72e6b367da4ad6d177dee87021bb6259b48990db"
+  },
+  ".gitignore": {
+    "sha256": "7e6ad79946f5211d0f80301d1538b53f13b05084df42acaedc70affdb7657d93"
+  },
+  ".local/bin/arabic-keyboard-toggle": {
+    "sha256": "1f2f4177d4cb65792cb9049c02a028cdbee44dd26097c50a0c479e4d01eefa4b"
+  },
+  ".local/bin/omarchy-theme": {
+    "sha256": "dd472cf1b739827f02fe4c9a36da47b7bd00639f24c225dd2ca0b3eace535dca"
+  },
+  ".local/bin/rofi-sections": {
+    "sha256": "39f8a4999b7d58f50eccb6b435c3223b678e83853b27d3928b208e1a25221126"
+  },
+  ".local/bin/wallpaper-theme": {
+    "sha256": "cf15f9259318f4c20af50659f319458bab9985a778d8c0fdfeb8c32788a8b58d"
+  },
+  ".local/share/omarchy-themes/index.json": {
+    "sha256": "696f49305e0346b75b7ed98b2d6e32e540a23cb53233c32d50a88652d63e8c64"
+  },
+  "README.md": {
+    "sha256": "b00d39bc8513875f5e84c17dd42e57d704d38e5a9bbbc722c691374fb8153783"
+  },
+  "SECURITY.md": {
+    "sha256": "45d555cb56e51b2db034dbcfe5db083a13be9c3f4d30bf6a30cae407f500a798"
+  },
+  "docs/ATTRIBUTION.md": {
+    "sha256": "1d7d3684547eb549f4a9a1bef0879dde65a81fe863758690e3aa60d81cd40ed4"
+  },
+  "docs/CHANGES.md": {
+    "sha256": "71c6257e275f9acbdb887a828e73603c8921df8947cdc52466dabace8cf844d5"
+  },
+  "docs/DEPENDENCIES.md": {
+    "sha256": "296e52463bdd923cc314a5dbe6518fffdc4fe2472a79788154745185e60283ee"
+  },
+  "docs/OPTIONAL.md": {
+    "sha256": "6bd2279cedf48c80157c4a6f0dba4f66962673d74399d8039fadf390d0edc14d"
+  },
+  "docs/VALIDATION.md": {
+    "sha256": "95a834e369ac3b9b390710fae56d6627d67a9d342cc1028a40030d8f1f4f22e7"
+  },
+  "docs/executable-paths.json": {
+    "sha256": "1e19067153c78ca73a948e74e5ccafae93a803bb15787325d81ce2a5783875e4"
+  },
+  "docs/source-manifest.json": {
+    "sha256": "a9b0b994effba9e818d6202784e963e337056f69e1fefa03d77517fdbc91c38c"
+  },
+  "optional/arabic-keyboard/LICENSE": {
+    "sha256": "3972dc9744f6499f0f9b2dbf76696f2ae7ad8af9b23dde66d6af86c9dfb36986"
+  },
+  "optional/arabic-keyboard/config.arabicpc.h": {
+    "sha256": "0832ea5f346372c9b033d506a4923924e1f0f2d515871a2610e8d4b83a6e253b"
+  },
+  "optional/arabic-keyboard/keymap.arabicpc.h": {
+    "sha256": "19d8e62f1bb769d80910b74bdd736fc4d6b2b33007c62ed2328b9bb62b12650a"
+  },
+  "optional/arabic-keyboard/layout.arabicpc.h": {
+    "sha256": "a946c49cc1e4782135b06fcf5e05aad201af7837343f029044e33d3ad3a6e38d"
+  },
+  "optional/battery/root/etc/systemd/system/cruze-charge-mode.service": {
+    "sha256": "3c7afdfaa876e9e66b4401498fd91021e9caf08a63926bb0b230359fd8290d4c"
+  },
+  "optional/battery/root/usr/local/libexec/cruze-charge-mode": {
+    "sha256": "fedea1931bb4d8855e69ffa2182d18a7821edf27e3bcbf0dab5ad2aa58f3f56b"
+  },
+  "optional/noctalia/.config/noctalia/hooks/wallpaper-mode.py": {
+    "sha256": "725d0372f6e1f6340219281eca16334b032ebe3160a4fdc145ecbf3373a4ce9c"
+  },
+  "optional/noctalia/.config/noctalia/wallpaper-mode.toml": {
+    "sha256": "02dcfa29fa16d1458099e7d764d1735e9d68dab545fc888e3cae44f3fb72e707"
+  },
+  "optional/sddm/root/etc/sddm.conf.d/90-cruze-noir.conf": {
+    "sha256": "15c65b2eacae07ec4ada89ac5d69063ce9e325f6913f7e72608f5a88279a99e5"
+  },
+  "optional/sddm/root/usr/share/sddm/themes/cruze-noir/Main.qml": {
+    "sha256": "91f698eebafb24d2548f35228f84977b908af039ca9de053b1cbd1ccbd09e309"
+  },
+  "optional/sddm/root/usr/share/sddm/themes/cruze-noir/avatar.svg": {
+    "sha256": "43d0946b875cc5c3722232645a1758a8961974f110c0417d125e390c0f4f3eb4"
+  },
+  "optional/sddm/root/usr/share/sddm/themes/cruze-noir/metadata.desktop": {
+    "sha256": "bbe7407c00cf850c910a6847c9020f8743fd43f8524c9af2d342e8fcdfb25389"
+  },
+  "optional/sddm/root/usr/share/sddm/themes/cruze-noir/theme.conf": {
+    "sha256": "a371ee2822ab833c1349cbe193bf4b9292d6ab6b49a22b525fc1dcd95aa933c1"
+  },
+  "scripts/check.py": {
+    "sha256": "22f692a55bf0411e01979bbacaa39ca875dfd7368c6833f07532b865729a842f"
+  },
+  "scripts/install.py": {
+    "sha256": "c63a117171b574f0dc7eeee44719efc5f23583cc964395c415563298773c7b6d"
+  }
+}

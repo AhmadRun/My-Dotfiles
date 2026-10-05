@@ -1,0 +1,14 @@
+[
+  ".config/fastfetch/pick-image.fish",
+  ".config/noctalia/hooks/wallpaper-mode.py",
+  ".config/rofi/launchers/launcher.sh",
+  ".config/rofi/powermenu/powermenu.sh",
+  ".config/waybar/scripts/Cava.sh",
+  ".config/waybar/scripts/battery-menu.sh",
+  ".config/waybar/scripts/battery-mode.sh",
+  ".config/waybar/scripts/wifi-menu.sh",
+  ".local/bin/arabic-keyboard-toggle",
+  ".local/bin/omarchy-theme",
+  ".local/bin/rofi-sections",
+  ".local/bin/wallpaper-theme"
+]
