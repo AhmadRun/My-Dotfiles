@@ -1,0 +1,11 @@
+[SddmGreeterTheme]
+Name=Cruze Noir
+Description=Dark geometric login with a dot clock and crimson accents
+Author=My Dotfiles
+Type=sddm-theme
+Version=1.0
+MainScript=Main.qml
+ConfigFile=theme.conf
+Theme-Id=cruze-noir
+Theme-API=2.0
+QtVersion=6
