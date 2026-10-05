@@ -1,0 +1,8 @@
+# Keep the shell and applications together, with wallpaper-derived colors.
+[theme]
+shell_mode = "follow"
+source = "wallpaper"
+
+[hooks]
+started = "@HOME@/.config/noctalia/hooks/wallpaper-mode.py"
+wallpaper_changed = "@HOME@/.config/noctalia/hooks/wallpaper-mode.py"
