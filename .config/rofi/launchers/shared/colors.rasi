@@ -1,0 +1,3 @@
+/* Local adaptation for My Dotfiles, 2026-10-05. Upstream notices retained. */
+/* Colors come from the active system theme (written by omarchy-theme). */
+@import "~/.config/rofi/theme-colors.rasi"

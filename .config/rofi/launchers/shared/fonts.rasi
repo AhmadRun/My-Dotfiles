@@ -1,0 +1,13 @@
+/* Local adaptation for My Dotfiles, 2026-10-05. Upstream notices retained. */
+/**
+ *
+ * Author : Aditya Shakya (adi1090x)
+ * Github : @adi1090x
+ * 
+ * Fonts
+ *
+ **/
+
+* {
+    font: "Figtree Bold 12";
+}
