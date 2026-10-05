@@ -1,0 +1,13 @@
+/* Local adaptation for My Dotfiles, 2026-10-05. Upstream notices retained. */
+@import "cruze-colors.rasi"
+* {font: "JetBrainsMono Nerd Font Mono 13"; background-color: transparent; text-color: @fg;}
+window {location: south; anchor: south; y-offset: -35px; width: 1080px; border: 2px; border-color: @accent; border-radius: 18px; background-color: @bg; padding: 16px;}
+mainbox {children: [inputbar, listview]; spacing: 12px;}
+inputbar {children: [prompt, entry]; spacing: 12px; padding: 3px;}
+prompt {text-color: @accent;}
+entry {placeholder: "Search wallpapers…";}
+listview {columns: 5; lines: 1; fixed-height: true; spacing: 12px; cycle: true; scrollbar: false;}
+element {orientation: vertical; padding: 6px; spacing: 7px; border: 2px; border-color: transparent; border-radius: 12px;}
+element selected.normal {background-color: @bg-alt; border-color: @accent;}
+element-icon {size: 140px; horizontal-align: 0.5;}
+element-text {horizontal-align: 0.5; font: "JetBrainsMono Nerd Font Mono 13";}

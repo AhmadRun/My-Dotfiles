@@ -1,0 +1,13 @@
+/* Local adaptation for My Dotfiles, 2026-10-05. Upstream notices retained. */
+@import "cruze-colors.rasi"
+* { font: "JetBrainsMono Nerd Font Mono 13"; background-color: transparent; text-color: @fg; }
+window { width: 390px; location: center; anchor: center; background-color: @bg; border: 2px; border-color: @accent; border-radius: 20px; padding: 18px; }
+mainbox { children: [inputbar, listview]; spacing: 14px; }
+inputbar { children: [prompt, entry]; spacing: 14px; padding: 8px; }
+prompt { text-color: @accent; }
+entry { placeholder: "Choose action…"; }
+listview { lines: 5; columns: 1; fixed-height: false; spacing: 6px; scrollbar: false; }
+element { children: [element-text]; padding: 13px 16px; border-radius: 12px; }
+element-text { vertical-align: 0.5; }
+element selected.normal, element selected.active { background-color: @accent; text-color: @accent-fg; }
+element-text selected.normal, element-text selected.active { text-color: @accent-fg; }

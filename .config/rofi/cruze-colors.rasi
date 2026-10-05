@@ -1,0 +1,2 @@
+/* Local adaptation for My Dotfiles, 2026-10-05. Upstream notices retained. */
+* { bg: #12131c; bg-alt: #1e1f29; fg: #e3e1ef; accent: #bfc1ff; accent-fg: #0700ab; border: #918f9c; }

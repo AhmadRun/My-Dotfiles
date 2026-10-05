@@ -1,0 +1,107 @@
+[
+  {
+    "name": "Development",
+    "subtitle": "Code & developer tools",
+    "description": "IDEs, editors and development tools, including CLion, VS Code and Docker.",
+    "icon": "vscode",
+    "categories": [
+      "Development"
+    ]
+  },
+  {
+    "name": "Browsers",
+    "subtitle": "Explore the web",
+    "description": "Your web browsers, including Firefox and Helium.",
+    "icon": "firefox",
+    "categories": [
+      "WebBrowser"
+    ]
+  },
+  {
+    "name": "Communication",
+    "subtitle": "Chat & messaging",
+    "description": "Messaging, chat and email applications, including Telegram.",
+    "icon": "org.telegram.desktop",
+    "categories": [
+      "Chat",
+      "InstantMessaging",
+      "Email",
+      "Telephony"
+    ]
+  },
+  {
+    "name": "Media",
+    "subtitle": "Music, video & camera",
+    "description": "Audio players, video players, recording and camera applications.",
+    "icon": "org.gnome.Showtime",
+    "categories": [
+      "AudioVideo",
+      "Audio",
+      "Video",
+      "Music"
+    ]
+  },
+  {
+    "name": "Office",
+    "subtitle": "Documents & productivity",
+    "description": "Documents, spreadsheets, presentations, calendars and readers.",
+    "icon": "libreoffice-writer",
+    "categories": [
+      "Office"
+    ]
+  },
+  {
+    "name": "Graphics",
+    "subtitle": "Images & design",
+    "description": "Image viewers, graphics tools and document scanning.",
+    "icon": "org.gnome.Loupe",
+    "categories": [
+      "Graphics"
+    ]
+  },
+  {
+    "name": "System & Tools",
+    "subtitle": "Settings & utilities",
+    "description": "System settings, terminals, file management, networking and everyday utilities.",
+    "icon": "org.gnome.Settings",
+    "categories": [
+      "System",
+      "Settings",
+      "Utility",
+      "Network"
+    ]
+  },
+  {
+    "name": "Games",
+    "subtitle": "Play & entertainment",
+    "description": "Installed games and gaming applications.",
+    "icon": "applications-games",
+    "categories": [
+      "Game"
+    ]
+  },
+  {
+    "name": "Education & Science",
+    "subtitle": "Learning & research",
+    "description": "Educational software and scientific applications.",
+    "icon": "applications-science",
+    "categories": [
+      "Education",
+      "Science"
+    ]
+  },
+  {
+    "name": "Other",
+    "subtitle": "Uncategorized applications",
+    "description": "Applications that do not declare one of the categories above.",
+    "icon": "org.gnome.Nautilus",
+    "other": true
+  },
+  {
+    "name": "All applications",
+    "subtitle": "Everything in one place",
+    "description": "Search all installed applications without a category filter.",
+    "icon": "org.gnome.Software",
+    "categories": []
+  }
+]

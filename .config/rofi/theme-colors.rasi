@@ -1,0 +1,17 @@
+/* Local adaptation for My Dotfiles, 2026-10-05. Upstream notices retained. */
+* {
+    wbg-color: #0b1826e6;
+    fg-color: #c5d8dcff;
+    fgp-color: #5f6e78ff;
+    hl-color: #9cce6aff;
+    hlt-color: #0b1826ff;
+    alt-color: #1a2735ff;
+    w-border-color: #9cce6aff;
+    background: #0b1826ff;
+    background-alt: #1a2735ff;
+    foreground: #c5d8dcff;
+    selected: #9cce6aff;
+    active: #9cce6aff;
+    urgent: #df8074ff;
+    border: #9cce6aff;
+}
