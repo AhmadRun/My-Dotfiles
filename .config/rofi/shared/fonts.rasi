@@ -1,0 +1,9 @@
+/* Local adaptation for My Dotfiles, 2026-10-05. Upstream notices retained. */
+/* Copyright (C) 2020-2023 Aditya Shakya <adi1090x@gmail.com> */
+
+/* Text Font */
+
+* {
+    font: "Figtree Bold 12";
+}
+
