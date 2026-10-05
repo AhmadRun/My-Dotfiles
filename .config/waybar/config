@@ -1,0 +1,28 @@
+{
+  "layer": "top",
+  "position": "top",
+  "height": 26,
+  "modules-left": [
+    "custom/launcher",
+    "group/traybox",
+    "niri/workspaces"
+  ],
+  "modules-center": [
+    "clock"
+  ],
+  "modules-right": [
+    "backlight",
+    "pulseaudio",
+    "niri/language",
+    "temperature",
+    "group/hardware",
+    "battery",
+    "network",
+    "idle_inhibitor",
+    "custom/power"
+  ],
+  "include": [
+    "~/.config/waybar/modules.json"
+  ],
+  "margin-top": 6
+}
