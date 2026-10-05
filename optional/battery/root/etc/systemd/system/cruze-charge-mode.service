@@ -1,0 +1,9 @@
+[Unit]
+Description=Restore selected battery charge limits
+After=systemd-udev-settle.service
+ConditionPathExists=/sys/class/power_supply/BAT0/charge_control_end_threshold
+[Service]
+Type=oneshot
+ExecStart=/usr/local/libexec/cruze-charge-mode restore
+[Install]
+WantedBy=multi-user.target
