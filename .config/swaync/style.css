@@ -1,0 +1,7 @@
+@import "colors.css";
+* {font-family: "Adwaita Sans"; font-size: 13px; color: @fg;}
+.control-center {background: alpha(@bg,0.97); border: 2px solid @accent; border-radius: 18px; padding: 12px;}
+.notification {background: @surface; border: 1px solid @accent; border-radius: 14px; margin: 6px; padding: 10px;}
+.notification-default-action {background: transparent;}
+.notification-action, button {background: @surface; border-radius: 10px;}
+.close-button {background: @accent; color: @on_accent;}
