@@ -1,0 +1,9 @@
+#!/usr/bin/env bash
+set -euo pipefail
+python3 scripts/check.py
+if ! command -v gitleaks >/dev/null; then
+    echo 'Install Gitleaks from its official project before committing.' >&2
+    exit 1
+fi
+gitleaks dir . --redact --no-banner
+gitleaks git --pre-commit --staged --redact --no-banner
