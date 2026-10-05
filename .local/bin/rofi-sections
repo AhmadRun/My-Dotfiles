@@ -1,0 +1,98 @@
+#!/usr/bin/env python3
+"""Section picker followed by Rofi's native desktop application launcher."""
+import html
+import json
+import subprocess
+import textwrap
+from pathlib import Path
+from gi.repository import Gio
+
+CONFIG_DIR = Path.home() / '.config/rofi'
+
+
+def picker_command(selected):
+    return ['rofi', '-dmenu', '-i', '-no-custom', '-markup-rows', '-format', 'i',
+            '-no-sort', '-matching', 'normal', '-selected-row', str(selected), '-p', 'Applications',
+            '-theme-str', '''
+entry { placeholder: "Search apps or browse sections..."; }
+textbox-details-title { content: "Details"; }
+button-open { content: "Open  ↵"; }
+''']
+
+
+def application_command(section, sections):
+    cmd = ['rofi', '-show', 'drun', '-display-drun', section['name'],
+           '-no-drun-use-desktop-cache', '-theme-str',
+           'entry { placeholder: "Search apps · Esc: sections"; }']
+    cmd += ['-drun-categories', ','.join(section.get('categories', []))]
+    if section.get('other'):
+        known = sorted({c for s in sections for c in s.get('categories', [])})
+        cmd += ['-drun-exclude-categories', ','.join(known)]
+    else:
+        cmd += ['-drun-exclude-categories', '']
+    return cmd
+
+
+def clean(text):
+    return ' '.join((text or '').replace('\x1f', ' ').replace('\0', ' ').split())
+
+
+def row(name, subtitle, description, icon, meta=''):
+    # Filter names and aliases, not descriptive text in the details panel.
+    display = (f"<b>{html.escape(clean(name))}</b>&#10;"
+               f"<span size='small'>{html.escape(clean(subtitle))}</span>"
+               "&#10;&#10;" + '&#10;'.join(
+                   html.escape(line) for line in textwrap.wrap(clean(description), 30)))
+    return (clean(name + ' ' + meta) + '\0display\x1f' + display + '\x1ficon\x1f'
+            + clean(icon))
+
+
+def build_rows(sections):
+    rows = [row(s['name'], s['subtitle'], s['description'], s['icon'])
+            for s in sections]
+    apps = sorted((a for a in Gio.AppInfo.get_all() if a.should_show()),
+                  key=lambda a: a.get_name().casefold())
+    for app in apps:
+        icon = app.get_icon().to_string() if app.get_icon() else 'application-x-executable'
+        generic = app.get_generic_name() or 'Application'
+        description = app.get_description() or generic
+        command = app.get_commandline() or ''
+        aliases = ''.join(app.get_name().split()) if ' ' in app.get_name() else ''
+        if app.get_id() == 'code.desktop':
+            aliases += ' vscode vs code'
+        rows.append(row(app.get_name(), generic, description, icon, aliases)
+                    .replace('\x1ficon\x1f',
+                             "&#10;&#10;<span size='small' alpha='70%'>Exec: "
+                             + html.escape(clean(command)) + "</span>\x1ficon\x1f", 1))
+    return rows, apps
+
+
+def main():
+    sections = json.loads((CONFIG_DIR / 'sections.json').read_text())
+    rows, apps = build_rows(sections)
+    selected = 0
+    while True:
+        result = subprocess.run(picker_command(selected), input='\n'.join(rows),
+                                text=True, stdout=subprocess.PIPE)
+        if result.returncode != 0:
+            return
+        try:
+            selected = int(result.stdout.strip())
+            if not 0 <= selected < len(rows):
+                return
+        except ValueError:
+            return
+        if selected >= len(sections):
+            app = apps[selected - len(sections)]
+            result = subprocess.run(['gio', 'launch', app.get_filename()],
+                                    capture_output=True, text=True)
+            if result.returncode:
+                subprocess.run(['rofi', '-e', result.stderr or 'Unable to launch application'])
+            return
+        result = subprocess.run(application_command(sections[selected], sections))
+        if result.returncode != 1:
+            return
+
+
+if __name__ == '__main__':
+    main()

@@ -1,0 +1,25 @@
+#!/bin/bash
+# Pick a wallpaper with rofi, apply it with awww, and recolor the system with matugen.
+# Usage: wallpaper-theme          (open picker)
+#        wallpaper-theme restore  (re-apply the last wallpaper at login)
+DIR="$HOME/Pictures/Wallpaper-Collection/Wallpapers"
+STATE="$HOME/.local/state/wallpaper-theme"
+
+pgrep -x awww-daemon >/dev/null || { setsid -f awww-daemon >/dev/null 2>&1; sleep 0.5; }
+
+if [[ $1 == restore ]]; then
+    [[ -f $STATE ]] && wall=$(<"$STATE") || wall=$(find "$DIR" -type f | sort | head -1)
+    for i in {1..30}; do awww query >/dev/null 2>&1 && break; sleep 0.1; done
+    awww img "$wall" --transition-type none
+    exit
+fi
+
+choice=$(for f in "$DIR"/*; do printf '%s\0icon\x1f%s\n' "$(basename "$f")" "$f"; done |
+    rofi -dmenu -i -show-icons -p "Wallpaper" \
+        -theme-str 'window {width: 900px;} listview {columns: 4; lines: 2;} element {orientation: vertical;} element-icon {size: 160px;} element-text {horizontal-align: 0.5;}')
+[[ -z $choice ]] && exit
+
+wall="$DIR/$choice"
+awww img "$wall" --transition-type grow --transition-duration 1
+mkdir -p "$(dirname "$STATE")"; echo "$wall" > "$STATE"
+omarchy-theme --wallpaper "$wall"

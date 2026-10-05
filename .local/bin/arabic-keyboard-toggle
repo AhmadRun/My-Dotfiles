@@ -1,0 +1,7 @@
+#!/usr/bin/env bash
+# Show/hide the always-running Arabic on-screen keyboard (arabic-keyboard.service).
+if ! pkill -RTMIN -u "$(id -u)" -x wvkbd-arabicpc; then
+    systemctl --user start arabic-keyboard.service
+    sleep 0.5
+    pkill -SIGUSR2 -u "$(id -u)" -x wvkbd-arabicpc
+fi

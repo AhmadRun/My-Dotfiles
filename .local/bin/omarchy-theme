@@ -1,0 +1,437 @@
+#!/usr/bin/env python3
+"""Omarchy theme switcher for niri + waybar + kitty + rofi.
+
+Themes come from https://omarchy.deepakness.com/themes (index.json next to
+the downloaded themes). A theme is downloaded the first time it is picked.
+
+  omarchy-theme            open the picker
+  omarchy-theme <name>     apply a theme by name
+  omarchy-theme --previews download preview thumbnails for the picker
+"""
+import json
+import os
+import re
+import shutil
+import subprocess
+import sys
+import tempfile
+import tomllib
+from concurrent.futures import ThreadPoolExecutor
+from pathlib import Path
+
+HOME = Path.home()
+ROOT = HOME / ".local/share/omarchy-themes"
+INDEX = ROOT / "index.json"
+PREVIEWS = ROOT / "previews"
+STATE = HOME / ".local/state/omarchy-theme"
+WALL_STATE = HOME / ".local/state/wallpaper-theme"
+CFG = HOME / ".config"
+IMAGE_EXT = {".png", ".jpg", ".jpeg", ".webp", ".gif"}
+
+
+def slug(name):
+    return re.sub(r"[^a-z0-9]+", "-", name.lower()).strip("-")
+
+
+def notify(msg):
+    subprocess.run(["notify-send", "-t", "2500", "Theme", msg], check=False)
+
+
+def load_index():
+    return json.loads(INDEX.read_text())
+
+
+# ── download ─────────────────────────────────────────────────────────────────
+def fetch(theme):
+    """Download a theme: every small file, but only the first wallpaper.
+
+    Theme repos often carry hundreds of MB of backgrounds and only the first
+    one is ever used, so a blobless clone + sparse checkout skips the rest.
+    """
+    dest = ROOT / slug(theme["name"])
+    if dest.exists():
+        return dest
+    url = theme["url"].split("?")[0].split("#")[0].rstrip("/")
+    m = re.match(r"https://github.com/([^/]+)/([^/]+)/tree/([^/]+)/(.+)", url)
+    if m:  # a folder inside a bigger repo (official Omarchy themes)
+        owner, repo, branch, path = m.groups()
+        repo_url, branch_args = f"https://github.com/{owner}/{repo}", ["-b", branch]
+        path = path.strip("/")
+    else:
+        repo_url, branch_args, path = url, [], ""
+    pre = f"{path}/" if path else ""
+    with tempfile.TemporaryDirectory() as tmp:
+        git = lambda *a, **k: subprocess.run(["git", "-C", tmp, *a], check=True, **k)
+        subprocess.run(["git", "clone", "-q", "--depth", "1", "--filter=blob:none", "--no-checkout",
+                        *branch_args, repo_url, tmp], check=True)
+        names = git("ls-tree", "-r", "--name-only", "HEAD", "--", f"{pre}backgrounds",
+                    capture_output=True, text=True).stdout.splitlines()
+        imgs = sorted(n for n in names if Path(n).suffix.lower() in IMAGE_EXT)
+        rules = [f"/{pre}*", f"!/{pre}backgrounds/*"] + [f"/{i}" for i in imgs[:1]]
+        git("sparse-checkout", "set", "--no-cone", *rules)
+        git("checkout", "-q")
+        shutil.copytree(Path(tmp) / path, dest, symlinks=True, ignore=shutil.ignore_patterns(".git"))
+    return dest
+
+
+def fetch_previews():
+    PREVIEWS.mkdir(parents=True, exist_ok=True)
+
+    def one(t):
+        out = PREVIEWS / f"{slug(t['name'])}.png"
+        if out.exists() or not t.get("preview"):
+            return
+        src = t["preview"] + ("&" if "?" in t["preview"] else "?") + "w=320"
+        tmp = out.with_suffix(".src")
+        if subprocess.run(["curl", "-sfL", "--max-time", "30", "-o", str(tmp), src]).returncode == 0:
+            subprocess.run(["magick", str(tmp), "-resize", "320x180^", "-gravity", "center",
+                            "-extent", "320x180", str(out)], check=False)
+        tmp.unlink(missing_ok=True)
+
+    with ThreadPoolExecutor(8) as pool:
+        list(pool.map(one, load_index()))
+
+
+# ── colors ───────────────────────────────────────────────────────────────────
+def hexnorm(v):
+    v = v.strip().strip('"\'')
+    v = v.replace("0x", "#")
+    return v[:7] if v.startswith("#") else None
+
+
+def palette(d):
+    """Return bg, fg, accent and color0..15 from whatever the theme ships."""
+    p = {}
+    f = d / "colors.toml"
+    if f.exists():
+        t = tomllib.loads(f.read_text())
+        flat = {k: hexnorm(str(v)) for k, v in t.items() if isinstance(v, str) and hexnorm(str(v))}
+        p.update(flat)
+        names = ["black", "red", "green", "yellow", "blue", "magenta", "cyan", "white"]
+        if "color0" not in p and "red" in p:  # named palette
+            p["color0"] = p.get("lighter_background", p.get("background"))
+            p["color8"] = p.get("muted", p.get("lighter_background"))
+            p["color7"] = p.get("dark_foreground", p.get("foreground"))
+            p["color15"] = p.get("bright_foreground", p.get("foreground"))
+            for i, n in enumerate(names[1:7], 1):
+                p[f"color{i}"] = p.get(n)
+                p[f"color{i + 8}"] = p.get(f"bright_{n}", p.get(n))
+    k = d / "kitty.conf"
+    if "background" not in p and k.exists():
+        for line in k.read_text().splitlines():
+            parts = line.split()
+            if len(parts) >= 2 and hexnorm(parts[1]):
+                p.setdefault(parts[0], hexnorm(parts[1]))
+    a = d / "alacritty.toml"
+    if "background" not in p and a.exists():
+        t = tomllib.loads(a.read_text()).get("colors", {})
+        p["background"] = hexnorm(t.get("primary", {}).get("background", ""))
+        p["foreground"] = hexnorm(t.get("primary", {}).get("foreground", ""))
+        names = ["black", "red", "green", "yellow", "blue", "magenta", "cyan", "white"]
+        for i, n in enumerate(names):
+            p[f"color{i}"] = hexnorm(t.get("normal", {}).get(n, ""))
+            p[f"color{i + 8}"] = hexnorm(t.get("bright", {}).get(n, "")) or p[f"color{i}"]
+    if not p.get("background") or not p.get("foreground"):
+        raise SystemExit(f"No colors found in {d}")
+    p.setdefault("accent", p.get("color4") or p["foreground"])
+    for i in range(16):
+        p[f"color{i}"] = p.get(f"color{i}") or p.get(f"color{i % 8}") or p["foreground"]
+    return p
+
+
+def mix(a, b, t):
+    a, b = [tuple(int(x[i:i + 2], 16) for i in (1, 3, 5)) for x in (a, b)]
+    return "#" + "".join(f"{round(x + (y - x) * t):02x}" for x, y in zip(a, b))
+
+
+def write_configs(p):
+    bg, fg, ac = p["background"], p["foreground"], p["accent"]
+    base = mix(bg, fg, 0.08)
+    s0, s1, s2 = mix(bg, fg, 0.14), mix(bg, fg, 0.22), mix(bg, fg, 0.32)
+    o0, o1 = mix(bg, fg, 0.45), mix(bg, fg, 0.6)
+    c = p
+    waybar = {
+        "base": base, "mantle": mix(bg, fg, 0.04), "crust": bg,
+        "text": fg, "subtext0": o1, "subtext1": mix(bg, fg, 0.75),
+        "surface0": s0, "surface1": s1, "surface2": s2,
+        "overlay0": o0, "overlay1": o1, "overlay2": mix(bg, fg, 0.7),
+        "blue": c["color4"], "lavender": ac, "sapphire": c["color12"], "sky": c["color6"],
+        "teal": c["color14"], "green": c["color2"], "yellow": c["color3"], "peach": c["color11"],
+        "maroon": c["color9"], "red": c["color1"], "mauve": ac, "pink": c["color13"],
+        "flamingo": c["color5"], "rosewater": c["color15"],
+    }
+    (CFG / "waybar/colors.css").write_text(
+        "".join(f"@define-color {k} {v};\n" for k, v in waybar.items()))
+
+    kitty = [f"foreground {fg}", f"background {bg}", f"cursor {ac}",
+             f"selection_foreground {bg}", f"selection_background {ac}",
+             f"active_border_color {ac}"] + [f"color{i} {c[f'color{i}']}" for i in range(16)]
+    (CFG / "kitty/theme.conf").write_text("\n".join(kitty) + "\n")
+
+    ring = f'active-color "{ac}"; inactive-color "{base}"; urgent-color "{c["color1"]}";'
+    (CFG / "niri/cruze-colors.kdl").write_text(
+        f"layout {{\n focus-ring {{ {ring} }}\n border {{ {ring} }}\n"
+        f" tab-indicator {{ {ring} }}\n insert-hint {{ color \"{ac}80\"; }}\n}}\n"
+        f'recent-windows {{ highlight {{ active-color "{ac}"; urgent-color "{c["color1"]}"; }}; }}\n')
+
+    (CFG / "rofi/theme-colors.rasi").write_text(
+        "* {\n"
+        f"    wbg-color: {bg}e6;\n    fg-color: {fg}ff;\n    fgp-color: {o0}ff;\n"
+        f"    hl-color: {ac}ff;\n    hlt-color: {bg}ff;\n    alt-color: {base}ff;\n"
+        f"    w-border-color: {ac}ff;\n"
+        f"    background: {bg}ff;\n    background-alt: {base}ff;\n    foreground: {fg}ff;\n"
+        f"    selected: {ac}ff;\n    active: {ac}ff;\n    urgent: {c['color1']}ff;\n    border: {ac}ff;\n"
+        "}\n")
+
+    # Shared palette for Neovim; atomic replacement keeps live readers safe.
+    nv = CFG / "nvim/omarchy-palette.json"
+    nv.parent.mkdir(parents=True, exist_ok=True)
+    tmp = nv.with_suffix(".tmp")
+    tmp.write_text(json.dumps(p) + "\n")
+    tmp.replace(nv)
+
+    write_extras(p, base, s0, s1, o0, o1)
+
+    subprocess.run(["pkill", "-SIGUSR2", "-x", "waybar"], check=False)
+    subprocess.run(["pkill", "-SIGUSR1", "-x", "kitty"], check=False)
+    subprocess.run(["swaync-client", "-rs"], capture_output=True, check=False)
+    subprocess.run(["pkill", "-USR1", "-x", "hx"], check=False)
+
+
+def is_light(hexcolor):
+    r, g, b = (int(hexcolor[i:i + 2], 16) for i in (1, 3, 5))
+    return (0.299 * r + 0.587 * g + 0.114 * b) > 140
+
+
+def replace_section(path, header, body):
+    """Replace everything from `header` to the end of the file (or append it)."""
+    text = path.read_text() if path.exists() else ""
+    i = text.find(header)
+    path.write_text((text[:i] if i >= 0 else text.rstrip() + "\n\n") + header + "\n" + body)
+
+
+def write_extras(p, base, s0, s1, o0, o1):
+    bg, fg, ac, c = p["background"], p["foreground"], p["accent"], p
+    light = is_light(bg)
+    on_ac = "#000000" if is_light(ac) else "#ffffff"
+
+    # Dark/light mode for every GTK/libadwaita/portal-aware app
+    scheme = "prefer-light" if light else "prefer-dark"
+    gs = ["gsettings", "set", "org.gnome.desktop.interface"]
+    subprocess.run(gs + ["color-scheme", scheme], check=False)
+    subprocess.run(gs + ["gtk-theme", "adw-gtk3" if light else "adw-gtk3-dark"], check=False)
+    icons = (ROOT / slug(STATE_NAME[0]) / "icons.theme") if STATE_NAME else None
+    if icons and icons.exists():
+        name = icons.read_text().strip()
+        if any((d / name).is_dir() for d in (Path("/usr/share/icons"), HOME / ".local/share/icons")):
+            subprocess.run(gs + ["icon-theme", name], check=False)
+
+    # GTK 3 + 4 (libadwaita named colors)
+    gtk = {
+        "accent_color": ac, "accent_bg_color": ac, "accent_fg_color": on_ac,
+        "window_bg_color": bg, "window_fg_color": fg,
+        "view_bg_color": base, "view_fg_color": fg,
+        "headerbar_bg_color": base, "headerbar_fg_color": fg, "headerbar_backdrop_color": bg,
+        "sidebar_bg_color": base, "sidebar_fg_color": fg,
+        "card_bg_color": s0, "card_fg_color": fg,
+        "dialog_bg_color": base, "dialog_fg_color": fg,
+        "popover_bg_color": base, "popover_fg_color": fg,
+        "destructive_bg_color": c["color1"], "destructive_color": c["color1"],
+        "success_color": c["color2"], "warning_color": c["color3"], "error_color": c["color1"],
+        # GTK3 legacy names
+        "theme_bg_color": bg, "theme_fg_color": fg, "theme_base_color": base,
+        "theme_text_color": fg, "theme_selected_bg_color": ac, "theme_selected_fg_color": on_ac,
+    }
+    css = "".join(f"@define-color {k} {v};\n" for k, v in gtk.items())
+    for d in ("gtk-3.0", "gtk-4.0"):
+        (CFG / d).mkdir(exist_ok=True)
+        (CFG / d / "colors.css").write_text(css)
+        (CFG / d / "gtk.css").write_text("@import 'colors.css';\n")
+        (CFG / d / "settings.ini").write_text(
+            "[Settings]\n"
+            f"gtk-application-prefer-dark-theme={'false' if light else 'true'}\n"
+            f"gtk-theme-name={'adw-gtk3' if light else 'adw-gtk3-dark'}\n"
+            "gtk-icon-theme-name=Adwaita\n"
+            "gtk-font-name=Figtree 11\n")
+
+    # Qt (qt6ct + qt5ct)
+    qt = [fg, s0, mix(s0, fg, 0.3), mix(s0, fg, 0.15), bg, o0, fg, fg, fg, base, bg, bg,
+          ac, on_ac, ac, c["color5"], s0, bg, base, fg, o1, ac]
+    row = ",".join(qt)
+    qt_scheme = f"[ColorScheme]\nactive_colors={row}\ninactive_colors={row}\ndisabled_colors={row}\n"
+    for d in ("qt6ct", "qt5ct"):
+        (CFG / d / "colors").mkdir(parents=True, exist_ok=True)
+        (CFG / d / "colors/cruze.conf").write_text(qt_scheme)
+
+    # Helix editor palette
+    replace_section(CFG / "helix/themes/cruze.toml", "[palette]", "".join(f'{k} = "{v}"\n' for k, v in {
+        "warning": c["color3"], "info": c["color6"], "hint": c["color14"], "plus": c["color2"],
+        "delta": c["color4"], "primary": ac, "surfaceTint": ac, "onPrimary": on_ac,
+        "primaryContainer": mix(ac, bg, 0.6), "onPrimaryContainer": mix(ac, fg, 0.6),
+        "secondary": c["color6"], "onSecondary": bg, "secondaryContainer": mix(c["color6"], bg, 0.6),
+        "onSecondaryContainer": mix(c["color6"], fg, 0.6),
+        "tertiary": c["color5"], "onTertiary": bg, "tertiaryContainer": mix(c["color5"], bg, 0.6),
+        "onTertiaryContainer": mix(c["color5"], fg, 0.6),
+        "error": c["color1"], "onError": bg, "errorContainer": mix(c["color1"], bg, 0.6),
+        "onErrorContainer": mix(c["color1"], fg, 0.6),
+        "background": bg, "onBackground": fg, "surface": bg, "onSurface": fg,
+        "surfaceVariant": s1, "onSurfaceVariant": o1, "outline": o0, "outlineVariant": s1,
+        "surfaceContainerLowest": mix(bg, "#000000", 0.2), "surfaceContainerLow": mix(bg, fg, 0.04),
+        "surfaceContainer": base, "surfaceContainerHigh": s0, "surfaceContainerHighest": s1,
+    }.items()))
+
+    # btop
+    (CFG / "btop/themes").mkdir(parents=True, exist_ok=True)
+    (CFG / "btop/themes/omarchy.theme").write_text("".join(f'theme[{k}]="{v}"\n' for k, v in {
+        "main_bg": bg, "main_fg": fg, "title": fg, "hi_fg": ac, "selected_bg": s1, "selected_fg": fg,
+        "inactive_fg": o0, "graph_text": o1, "meter_bg": s0, "proc_misc": c["color6"],
+        "cpu_box": ac, "mem_box": c["color2"], "net_box": c["color5"], "proc_box": c["color4"],
+        "div_line": s1, "temp_start": c["color2"], "temp_mid": c["color3"], "temp_end": c["color1"],
+        "cpu_start": c["color2"], "cpu_mid": c["color3"], "cpu_end": c["color1"],
+        "free_start": c["color2"], "free_mid": c["color6"], "free_end": c["color4"],
+        "cached_start": c["color4"], "cached_mid": c["color6"], "cached_end": c["color5"],
+        "available_start": c["color3"], "available_mid": c["color11"], "available_end": c["color1"],
+        "used_start": c["color2"], "used_mid": c["color3"], "used_end": c["color1"],
+        "download_start": c["color4"], "download_mid": c["color6"], "download_end": c["color5"],
+        "upload_start": c["color2"], "upload_mid": c["color3"], "upload_end": c["color1"],
+        "process_start": c["color4"], "process_mid": c["color5"], "process_end": c["color1"],
+    }.items()))
+    conf = CFG / "btop/btop.conf"
+    if conf.exists():
+        t = re.sub(r'(?m)^color_theme = .*$', f'color_theme = "{CFG}/btop/themes/omarchy.theme"', conf.read_text())
+        t = re.sub(r'(?m)^theme_background = .*$', "theme_background = False", t)
+        conf.write_text(t)
+
+    # Notifications (swaync)
+    (CFG / "swaync").mkdir(exist_ok=True)
+    (CFG / "swaync/colors.css").write_text(
+        f"@define-color bg {bg};\n@define-color fg {fg};\n@define-color accent {ac};\n"
+        f"@define-color on_accent {on_ac};\n@define-color surface {s0};\n"
+        f"@define-color muted {o0};\n@define-color error {c['color1']};\n")
+
+    # Lock screen (swaylock)
+    (CFG / "swaylock").mkdir(exist_ok=True)
+    h = lambda x: x.lstrip("#")
+    wall = WALL_STATE.read_text().strip() if WALL_STATE.exists() else ""
+    if wall and Path(wall).suffix.lower() not in {".png", ".jpg", ".jpeg"}:
+        # swaylock can only read formats gdk-pixbuf knows; convert the rest once
+        lock_img = HOME / ".cache/omarchy-theme/lock.png"
+        lock_img.parent.mkdir(parents=True, exist_ok=True)
+        subprocess.run(["magick", wall + "[0]", str(lock_img)], check=False)
+        wall = str(lock_img)
+    (CFG / "swaylock/config").write_text("\n".join([
+        f"image={wall}" if wall else f"color={h(bg)}", "scaling=fill", "indicator-radius=90",
+        "indicator-thickness=8", "font=Figtree",
+        f"inside-color={h(bg)}cc", f"ring-color={h(ac)}", f"key-hl-color={h(c['color2'])}",
+        f"bs-hl-color={h(c['color1'])}", f"text-color={h(fg)}", f"line-color=00000000",
+        f"separator-color=00000000", f"inside-ver-color={h(base)}cc", f"ring-ver-color={h(c['color4'])}",
+        f"text-ver-color={h(fg)}", f"inside-wrong-color={h(bg)}cc", f"ring-wrong-color={h(c['color1'])}",
+        f"text-wrong-color={h(c['color1'])}", f"inside-clear-color={h(bg)}cc",
+        f"ring-clear-color={h(c['color3'])}", f"text-clear-color={h(fg)}", ""]))
+
+    # fastfetch logo + keys
+    ff = CFG / "fastfetch/config.jsonc"
+    if ff.exists():
+        rgb = lambda x: "38;2;" + ";".join(str(int(x[i:i + 2], 16)) for i in (1, 3, 5))
+        j = json.loads(ff.read_text())
+        j.setdefault("logo", {})["color"] = {"1": rgb(ac)}
+        j.setdefault("display", {}).setdefault("color", {})["separator"] = rgb(ac)
+        for m in j.get("modules", []):
+            if isinstance(m, dict) and "keyColor" in m:
+                m["keyColor"] = rgb(c["color6"])
+        ff.write_text(json.dumps(j, indent=2, ensure_ascii=False) + "\n")
+
+    # Shell prompt (starship)
+    st = CFG / "starship.toml"
+    st.write_text(
+        f'format = """\n[](#{h(ac)})\\\n[ $directory ](bg:#{h(ac)} fg:#{h(on_ac)})\\\n'
+        f'[](#{h(ac)})\\\n$character"""\n\n[directory]\nformat = "$path"\ntruncation_length = 3\n'
+        f'truncate_to_repo = false\nstyle = "bg:#{h(ac)} fg:#{h(on_ac)}"\n\n[character]\n'
+        f'success_symbol = "[❯](bold #{h(c["color6"])})"\nerror_symbol = "[❯](bold #{h(c["color1"])})"\n')
+
+
+def set_wallpaper(d):
+    bg = d / "backgrounds"
+    imgs = sorted(f for f in bg.iterdir() if f.suffix.lower() in IMAGE_EXT) if bg.is_dir() else []
+    if not imgs:
+        return
+    subprocess.run(["awww", "img", str(imgs[0]), "--transition-type", "grow",
+                    "--transition-duration", "1"], check=False)
+    WALL_STATE.parent.mkdir(parents=True, exist_ok=True)
+    WALL_STATE.write_text(str(imgs[0]) + "\n")
+
+
+STATE_NAME = []  # theme being applied, for icons.theme lookup
+
+
+def wallpaper_palette(img):
+    """Build a palette from a wallpaper with matugen."""
+    r = subprocess.run(["matugen", "image", str(img), "--json", "hex", "--dry-run",
+                        "--source-color-index", "0"], capture_output=True, text=True, check=True)
+    d = json.loads(r.stdout)
+    col = lambda k: d["colors"][k]["dark"]["color"]
+    b16 = lambda k: d["base16"][k]["dark"]["color"]
+    p = {"background": col("surface"), "foreground": col("on_surface"), "accent": col("primary"),
+         "color0": col("surface_container_highest"), "color8": col("outline"),
+         "color7": col("on_surface_variant"), "color15": col("on_surface")}
+    for i, k in enumerate(["base08", "base0b", "base0a", "base0d", "base0e", "base0c"], 1):
+        p[f"color{i}"] = p[f"color{i + 8}"] = b16(k)
+    p["color4"] = p["color12"] = col("primary")
+    p["color1"] = p["color9"] = col("error")
+    return p
+
+
+def apply_wallpaper(img):
+    WALL_STATE.parent.mkdir(parents=True, exist_ok=True)
+    WALL_STATE.write_text(str(img) + "\n")
+    write_configs(wallpaper_palette(img))
+
+
+def apply(theme):
+    STATE_NAME[:] = [theme["name"]]
+    notify(f"Applying {theme['name']}…")
+    try:
+        d = fetch(theme)
+    except subprocess.CalledProcessError:
+        notify(f"Could not download {theme['name']}")
+        sys.exit(1)
+    set_wallpaper(d)
+    write_configs(palette(d))
+    STATE.parent.mkdir(parents=True, exist_ok=True)
+    STATE.write_text(theme["name"] + "\n")
+    notify(f"{theme['name']} applied")
+
+
+def pick():
+    themes = load_index()
+    current = STATE.read_text().strip() if STATE.exists() else ""
+    rows = []
+    for t in themes:
+        label = t["name"] + ("  ●" if t["name"] == current else "")
+        if (ROOT / slug(t["name"])).exists():
+            label += "  󰄬"
+        icon = PREVIEWS / f"{slug(t['name'])}.png"
+        rows.append(f"{label}\0icon\x1f{icon}" if icon.exists() else label)
+    theme_str = ("window { width: 860px; } listview { columns: 3; lines: 3; } "
+                 "element { orientation: vertical; } element-icon { size: 150px; } "
+                 "element-text { horizontal-align: 0.5; } entry { placeholder: \"Search themes\"; }")
+    r = subprocess.run(["rofi", "-dmenu", "-i", "-no-custom", "-show-icons", "-format", "i",
+                        "-p", "󰏘", "-theme-str", theme_str],
+                       input="\n".join(rows), capture_output=True, text=True)
+    if r.returncode == 0 and r.stdout.strip():
+        apply(themes[int(r.stdout.strip())])
+
+
+if __name__ == "__main__":
+    if len(sys.argv) > 1 and sys.argv[1] == "--previews":
+        fetch_previews()
+    elif len(sys.argv) > 2 and sys.argv[1] == "--wallpaper":
+        apply_wallpaper(Path(sys.argv[2]))
+    elif len(sys.argv) > 1:
+        want = " ".join(sys.argv[1:]).lower()
+        match = [t for t in load_index() if t["name"].lower() == want or slug(t["name"]) == slug(want)]
+        if not match:
+            sys.exit(f"Unknown theme: {want}")
+        apply(match[0])
+    else:
+        pick()
