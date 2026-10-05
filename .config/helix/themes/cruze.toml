@@ -1,0 +1,153 @@
+# Syntax highlighting
+# -------------------
+"attribute" = { fg = "primary", modifiers = ["bold"] }
+
+"type" = "primary"
+"type.enum.variant" = "secondary"
+
+"constructor" = "tertiary"
+
+"constant" = "secondary"
+"constant.character" = "secondaryContainer"
+"constant.character.escape" = "tertiaryContainer"
+
+"string" = { fg = "tertiary", bg = "surfaceContainerHigh" }
+"string.regexp" = { fg = "tertiaryContainer", bg = "surfaceContainerHigh" }
+"string.special" = { fg = "tertiary", bg = "surfaceContainerHigh" }
+"string.special.symbol" = { fg = "tertiary", bg = "surfaceContainerHigh" }
+"string.special.path" = { fg = "secondary", underline = { color = "secondary", style = "line" } }
+
+"path" = { fg = "secondary", underline = { color = "secondary", style = "line" } }
+
+"comment" = { fg = "outline", bg = "surfaceContainerHigh", modifiers = ["italic"] }
+
+"variable" = "onSurface"
+"variable.builtin" = "secondary"
+"variable.parameter" = { fg = "onSurfaceVariant", modifiers = ["italic"] }
+"variable.other.member" = "primary"
+
+"label" = "secondary"
+
+"punctuation" = "outlineVariant"
+"punctuation.special" = "outline"
+
+"keyword" = { fg = "primary", modifiers = ["bold"] }
+"keyword.control.conditional" = { fg = "tertiary", modifiers = ["italic", "bold"] }
+
+"operator" = { fg = "secondary", modifiers = ["bold"] }
+
+"function" = "tertiary"
+"function.macro" = "tertiary"
+
+"tag" = "secondary"
+
+"namespace" = { fg = "secondary", modifiers = ["italic"] }
+
+"special" = "secondary"
+
+"markup.heading" = "primary"
+"markup.list" = "onSurface"
+"markup.bold" = { fg = "secondary", modifiers = ["bold"] }
+"markup.italic" = { fg = "secondary", modifiers = ["italic"] }
+"markup.link.url" = { fg = "secondary", modifiers = ["italic", "underlined"] }
+"markup.link.label" = "primary"
+"markup.raw" = "onSurface"
+"markup.quote" = "secondary"
+
+"diff.plus" = "plus"
+"diff.minus" = "error"
+"diff.delta" = "delta"
+
+# User Interface
+# --------------
+"ui.background" = {}
+
+"ui.cursor" = { fg = "onSecondary", bg = "secondary" }
+"ui.cursor.match" = { fg = "onTertiary", bg = "tertiary", modifiers = ["bold"] }
+"ui.cursor.primary" = { fg = "onPrimary", bg = "primary" }
+
+"ui.linenr" = { fg = "onSurfaceVariant" }
+"ui.linenr.selected" = { fg = "primary" }
+
+"ui.statusline" = { fg = "onSurface", bg = "surfaceContainerLow" }
+"ui.statusline.inactive" = { fg = "onSurface", bg = "surfaceContainerLowest" }
+"ui.statusline.normal" = { fg = "onPrimary", bg = "primary", modifiers = ["bold"] }
+"ui.statusline.insert" = { fg = "onTertiary", bg = "tertiary", modifiers = ["bold"] }
+"ui.statusline.select" = { fg = "onSecondary", bg = "secondary", modifiers = ["bold"] }
+
+"ui.bufferline" = { fg = "onSurface", bg = "surfaceContainerLowest" }
+"ui.bufferline.active" = { fg = "onSurface", bg = "surfaceContainer", underline = { color = "primary", style = "line" } }
+"ui.bufferline.background" = { bg = "surfaceContainerLowest" }
+
+"ui.popup" = { fg = "onSurface", bg = "surfaceContainerLow" }
+
+"ui.window" = { fg = "onSurface" }
+"ui.help" = { fg = "onSurface", bg = "surfaceContainerLow" }
+
+"ui.text" = { fg = "onBackground" }
+"ui.text.focus" = { fg = "onSurface", bg = "surfaceContainer", modifiers = ["bold"] }
+
+"ui.virtual" = "surfaceVariant"
+"ui.virtual.ruler" = { bg = "surfaceContainerLow" }
+"ui.virtual.indent-guide" = "surfaceVariant"
+"ui.virtual.inlay-hint" = { fg = "onSurfaceVariant", bg = "surfaceContainer", modifiers = ["dim"] }
+"ui.virtual.jump-label" = { fg = "primary", modifiers = ["bold"] }
+
+"ui.menu" = { fg = "onSurface", bg = "surfaceContainer" }
+"ui.menu.selected" = { fg = "onPrimary", bg = "primary", modifiers = ["bold"] }
+
+"ui.selection" = { bg = "surfaceContainerHigh" }
+
+"ui.highlight" = { bg = "primaryContainer", modifiers = ["bold"] }
+
+"ui.cursorline" = { bg = "surfaceContainerLowest" }
+"ui.cursorline.primary" = { bg = "surfaceContainerLow" }
+"ui.cursorline.secondary" = { bg = "surfaceContainerLow" }
+
+error = "error"
+warning = "warning"
+info = "info"
+hint = "hint"
+
+"diagnostic.hint" = { underline = { color = "hint", style = "curl" } }
+"diagnostic.info" = { underline = { color = "info", style = "curl" } }
+"diagnostic.warning" = { underline = { color = "warning", style = "curl" } }
+"diagnostic.error" = { underline = { color = "error", style = "curl" } }
+"diagnostic.unnecessary" = { modifiers = ["dim"] }
+
+[palette]
+warning = "#d9bd7c"
+info = "#75bdbb"
+hint = "#99d9cf"
+plus = "#9cce6a"
+delta = "#7baacb"
+primary = "#9cce6a"
+surfaceTint = "#9cce6a"
+onPrimary = "#000000"
+primaryContainer = "#456141"
+onPrimaryContainer = "#b5d4ae"
+secondary = "#75bdbb"
+onSecondary = "#0b1826"
+secondaryContainer = "#355a62"
+onSecondaryContainer = "#a5cdcf"
+tertiary = "#ad9cc7"
+onTertiary = "#0b1826"
+tertiaryContainer = "#4c4d66"
+onTertiaryContainer = "#bbc0d4"
+error = "#df8074"
+onError = "#0b1826"
+errorContainer = "#604245"
+onErrorContainer = "#cfb5b2"
+background = "#0b1826"
+onBackground = "#c5d8dc"
+surface = "#0b1826"
+onSurface = "#c5d8dc"
+surfaceVariant = "#34424e"
+onSurfaceVariant = "#7b8b93"
+outline = "#5f6e78"
+outlineVariant = "#34424e"
+surfaceContainerLowest = "#09131e"
+surfaceContainerLow = "#12202d"
+surfaceContainer = "#1a2735"
+surfaceContainerHigh = "#25333f"
+surfaceContainerHighest = "#34424e"
