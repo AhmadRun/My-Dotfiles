@@ -1,0 +1,15 @@
+format = """
+[](#9cce6a)\
+[ $directory ](bg:#9cce6a fg:#000000)\
+[](#9cce6a)\
+$character"""
+
+[directory]
+format = "$path"
+truncation_length = 3
+truncate_to_repo = false
+style = "bg:#9cce6a fg:#000000"
+
+[character]
+success_symbol = "[❯](bold #75bdbb)"
+error_symbol = "[❯](bold #df8074)"
