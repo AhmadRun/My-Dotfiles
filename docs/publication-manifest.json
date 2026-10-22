@@ -105,7 +105,7 @@
     "sha256": "3b2d6e9976a515b7c8df08ed7c7f61a5751e9c08a6ff5579d621b87312c9e2c6"
   },
   ".config/nvim/lazy-lock.json": {
-    "sha256": "bf1ea3d276fb4f5cdfa87d700e8404af5717fda0f034fc584424eb803a4a1d30"
+    "sha256": "91b9603fbab3309f6a2a24686ef4533e25d22441648b5a0f92f564d1e01a8fec"
   },
   ".config/nvim/lazyvim.json": {
     "sha256": "c5e6e47a04e9afbf60e324cdbc6728357a63ef1eb10b68eb46539e57c02eb56b"
